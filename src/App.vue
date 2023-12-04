@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div style="background-color: rgb(206, 206, 206);" id="app">
     <app-top-bar></app-top-bar>
     <router-view></router-view>
   </div>
