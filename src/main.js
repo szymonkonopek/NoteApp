@@ -3,6 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap";
+import "./assets/styles.scss";
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";

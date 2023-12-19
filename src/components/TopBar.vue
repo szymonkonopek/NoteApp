@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="bg-secondary">
     <router-link :to="{ name: 'home' }">Home</router-link>
     <router-link :to="{ name: 'feed' }">Feed</router-link>
     <router-link :to="{ name: 'login' }">Login</router-link>
