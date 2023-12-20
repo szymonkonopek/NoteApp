@@ -2,8 +2,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import { getFirestore } from "firebase/firestore";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 //import "bootstrap";
 import "./assets/styles.scss";
 
@@ -25,7 +25,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 // getAnalytics(app);
+export const db = getFirestore(app);
 
 createApp(App).use(router).use(store).mount("#app");
