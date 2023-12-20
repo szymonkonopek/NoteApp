@@ -140,17 +140,9 @@ export default {
             content: this.noteContent,
             tags: this.checkedTags,
           })
-          .then(() => {
-            //Trzeba zamknąć modal
-
-            this.noteTitle = "";
-            this.noteContent = "";
-            this.checkedTags = [];
-          })
-          .then(() => {
-            this.$store.dispatch(actionTypes.getNotesByUserId, {
-              uid: "",
-            });
+          .then(async () => {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            this.$router.go();
           });
       }
     },
