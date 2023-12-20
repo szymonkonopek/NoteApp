@@ -1,6 +1,6 @@
 <template>
   <div>Feed</div>
-  <NotesList :uid="'9I4pFBfpeKS3gBh7FTdJIJki5g92'"></NotesList>
+  <NotesList :uid="''"></NotesList>
   <NewNoteButton></NewNoteButton>
 </template>
 
