@@ -22,7 +22,7 @@ const mutations = {
     state.isLoading = true;
   },
   [mutationTypes.enhanceTitleSuccess](state, payload) {
-    state.isLoading = false;
+    //state.isLoading = false;
     state.enhancedTitle = payload;
   },
   [mutationTypes.enhanceTitleFailure]() {},

@@ -22,24 +22,31 @@ export const actionTypes = {
 export const mutationType = {
   setNotes: "[firedb] setNotes",
   addNoteSuccess: "[firedb] addNoteSuccess",
+  addNoteStart: "[firedb] addNoteStart",
 };
 
 const state = {
   notes: undefined,
+  isLoading: false,
 };
 const mutations = {
   [mutationType.setNotes](state, payload) {
     state.notes = payload;
   },
-  [mutationType.addNoteSuccess]() {
+  [mutationType.addNoteSuccess](state) {
     location.reload();
+    state.isLoading = false;
+  },
+
+  [mutationType.addNoteStart](state) {
+    state.isLoading = true;
   },
 };
 
 const actions = {
   [actionTypes.getNotesByUserId](context, { uid }) {
     return new Promise((resolve) => {
-      console.log("start");
+      context.commit(mutationType.addNoteStart);
       let q = query(collection(db, "notes"));
       if (uid) {
         q = query(collection(db, "notes"), where("uid", "==", uid));

@@ -135,6 +135,7 @@
               <button
                 class="btn btn-primary p-1 m-1 text-white"
                 @click="submit"
+                :disabled="isLoading"
               >
                 Submit
               </button>
@@ -161,6 +162,7 @@ export default {
   computed: {
     ...mapState({
       enhancedTitle: (state) => state.chatgpt.enhancedTitle,
+      isLoading: (state) => state.firebase.isLoading,
     }),
   },
   data() {
@@ -171,6 +173,7 @@ export default {
       isWork: false,
       isPersonal: false,
       checkedTags: ref([]),
+      isLoading: false,
     };
   },
   methods: {
