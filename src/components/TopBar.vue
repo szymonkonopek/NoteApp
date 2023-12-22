@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Notes App</a>
+      <a class="navbar-brand fw-bold">IdeaMerge</a>
       <button
         class="navbar-toggler"
         type="button"
