@@ -60,7 +60,7 @@
               Profile
             </button>
             <button
-              class="btn btn-sm btn-outline-dark"
+              class="btn btn-outline-dark me-2"
               type="button"
               @click="handleSignOut"
               v-if="isLoggedIn"

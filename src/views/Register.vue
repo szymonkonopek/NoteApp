@@ -12,11 +12,11 @@
           </div>
           <div class="input-group input-group-lg py-2">
             <span class="input-group-text" id="inputGroup-sizing-lg">Password</span>
-            <input type="text" class="form-control" placeholser="Password" v-model="password" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            <input type="password" class="form-control" placeholser="Password" v-model="password" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
           </div>
           <div>
             <button
-              class="btn btn-lg btn-outline-secondary text-black my-2"
+              class="btn btn-lg btn-outline-dark my-2"
               @click="register"
             >
               Submit
@@ -24,7 +24,7 @@
           </div>
           <div>
             <button
-              class="btn btn-lg btn-outline-secondary text-black my-2"
+              class="btn btn-lg btn-outline-dark my-2"
               @click="signInWithGoogle"
             >
               Sign in with Google
