@@ -53,7 +53,13 @@ const actions = {
       }
 
       getDocs(q).then((result) => {
-        const notes = result.docs.map((doc) => doc.data());
+        const notes = result.docs.map((doc) => {
+          doc.data();
+          return {
+            id: doc.id,
+            data: doc.data(),
+          };
+        });
         context.commit(mutationType.setNotes, notes);
         resolve();
       });
