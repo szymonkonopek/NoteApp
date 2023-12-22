@@ -11,7 +11,7 @@
 
   <!-- Modal -->
   <div
-    class="modal fade"
+    class="modal fade modal-lg"
     id="exampleModal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
@@ -40,7 +40,40 @@
                 aria-describedby="textHelp"
                 v-model="noteTitle"
                 required
+                v-if="enhancedTitle.length == 0"
               />
+              <div
+                class="d-flex flex-row position-relative"
+                v-if="enhancedTitle.length > 0"
+              >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="titleInput"
+                  maxlength="60"
+                  aria-describedby="textHelp"
+                  v-model="enhancedTitle"
+                  disabled
+                  required
+                  @click="test"
+                />
+                <div
+                  class="position-absolute top-50 end-0 translate-middle-y d-flex flex-row"
+                >
+                  <button
+                    class="btn btn-link text-secondary p-0"
+                    @click="updateTitle"
+                  >
+                    <i class="bi bi-check-square-fill"></i>
+                  </button>
+                  <button
+                    class="btn btn-link text-secondary"
+                    @click="discardTitle"
+                  >
+                    <i class="bi bi-x-square"></i>
+                  </button>
+                </div>
+              </div>
               <div id="textHelp" class="form-text">
                 Type title of your new note
               </div>
@@ -105,9 +138,10 @@
               >
                 Submit
               </button>
-              <button class="btn btn-primary p-1 m-1 text-white" @click="ai">
-                Enchance with AI
-              </button>
+              <EnhanceTitleButton
+                :noteTitle="noteTitle"
+                :noteContent="noteContent"
+              />
             </div>
           </form>
         </div>
@@ -118,12 +152,20 @@
 <script>
 import { actionTypes } from "@/store/modules/firebasedb";
 import { ref } from "vue";
+import EnhanceTitleButton from "./EnhanceTitleButton.vue";
+import { mapState } from "vuex";
+import { mutationTypes } from "@/store/modules/chatgpt";
 
 export default {
   name: "NewNoteButton",
+  computed: {
+    ...mapState({
+      enhancedTitle: (state) => state.chatgpt.enhancedTitle,
+    }),
+  },
   data() {
     return {
-      noteTitle: "",
+      noteTitle: ref(""),
       noteContent: "",
       isSchool: false,
       isWork: false,
@@ -146,9 +188,18 @@ export default {
           });
       }
     },
-    ai() {
-      console.log("ai");
+    test() {
+      console.log("test");
+    },
+    updateTitle() {
+      this.noteTitle = this.enhancedTitle;
+      this.$store.commit(mutationTypes.setEnhancedTitle, "");
+    },
+    discardTitle() {
+      this.noteTitle = "";
+      this.$store.commit(mutationTypes.setEnhancedTitle, "");
     },
   },
+  components: { EnhanceTitleButton },
 };
 </script>

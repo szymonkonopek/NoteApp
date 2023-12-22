@@ -1,8 +1,8 @@
 // Override the primary color variable
-$primary: #9bb8cd;
-$secondary: #fff7d4;
-$info: #eec759;
-$success: #b1c381;
+$secondary: #323232;
+$primary: #dbd0c9;
+//$info: #eec759;
+//$success: #b1c381;
 
 // Re-compile Bootstrap with the overridden variables
 @import "../../node_modules/bootstrap/scss/bootstrap";
