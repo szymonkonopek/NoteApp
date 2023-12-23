@@ -11,18 +11,9 @@
 
 <script>
 import { db } from "@/main.js";
-//import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
-//collection,
- //getDocs,
  doc,
- //where,
- //query,
  deleteDoc,
-// and
-// //updateDoc,
-//serverTimestamp,
-//orderBy,
 } from "firebase/firestore";
 export default {
 name: "DeleteButton",

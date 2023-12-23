@@ -10,6 +10,7 @@
     </div>
     <div>
       <DeleteButton v-if="isNoteOwner" :noteId="noteId"></DeleteButton>
+      <EditNoteButton v-if="isNoteOwner" :noteId="noteId"></EditNoteButton>
     </div>
   </div>
 </template>
@@ -17,6 +18,8 @@
 <script>
 import { getAuth } from "firebase/auth";
 import DeleteButton from "./DeleteButton.vue";
+import EditNoteButton from './EditNoteButton.vue';
+
 
 export default {
   name: "AppNotesView",
@@ -33,7 +36,7 @@ export default {
       noteId: this.note.id
     };
   },
-  components: { DeleteButton },
+  components: { DeleteButton, EditNoteButton},
   mounted() {
     this.auth = getAuth;
     this.auth().onAuthStateChanged((user) => {
