@@ -9,7 +9,7 @@
       <span class="badge rounded-pill bg-primary">tag : {{ tag }}</span>
     </div>
     <div>
-      <DeleteButton v-if="isNoteOwner"></DeleteButton>
+      <DeleteButton v-if="isNoteOwner" :noteId="noteId"></DeleteButton>
     </div>
   </div>
 </template>
@@ -30,6 +30,7 @@ export default {
     return {
       auth: "",
       currentUserId: "",
+      noteId: this.note.id
     };
   },
   components: { DeleteButton },
