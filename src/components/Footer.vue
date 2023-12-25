@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <footer class="text-center text-black bg-secondary">
+    <footer class="text-center text-black" style="background-color:#808080">
         <div class="container p-4 pb-0">
           <section class="">
             <p class="d-flex justify-content-center align-items-center" v-if="!isLoggedIn">
