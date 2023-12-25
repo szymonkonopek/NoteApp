@@ -40,7 +40,7 @@ const routes = [
   }
 ];
 
-const getCurrentUser = () => {
+export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const removeListener = getAuth().onAuthStateChanged((user) => {
       removeListener();
