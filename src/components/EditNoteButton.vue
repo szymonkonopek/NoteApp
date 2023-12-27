@@ -159,7 +159,7 @@ methods: {
   submit() {
     return new Promise((resolve) => {
       console.log(this.noteContent)
-      const noteRef = doc(db, "notes", this.note.id);
+      const noteRef = doc(db, "notes", this.noteObject.id);
 
       updateDoc(noteRef, {
           "data.content": this.noteContent,
