@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, updatePassword } from "firebase/auth";
 import {
   collection,
   getDocs,
@@ -17,6 +17,9 @@ import { db } from "@/main.js";
 export const actionTypes = {
   getNotesByUserId: "[firedb] getNotesByUserId",
   addNote: "[firedb] addNote",
+  updatePassword: "[auth] Update Password",
+  getUserDetails: "[auth] Get User Details",
+
 };
 
 export const mutationType = {
@@ -76,6 +79,41 @@ const actions = {
         //context.commit(mutationType.addNoteSuccess);
         resolve();
       });
+    });
+  },
+
+  [actionTypes.updatePassword](context, { newPassword }) {
+    return new Promise((resolve, reject) => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        updatePassword(user, newPassword).then(() => {
+          resolve("Password updated successfully");
+        }).catch((error) => {
+          reject(error);
+        });
+      } else {
+        reject("No authenticated user");
+      }
+    });
+  },
+  [actionTypes.getUserDetails]() {
+    return new Promise((resolve, reject) => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user) {
+        const userDetails = {
+          uid: user.uid,
+          email: user.email,
+          providers: user.providerData.map(provider => provider.providerId),
+          created: user.metadata.creationTime,
+          lastSignIn: user.metadata.lastSignInTime
+        };
+        resolve(userDetails);
+      } else {
+        reject("No authenticated user");
+      }
     });
   },
 };

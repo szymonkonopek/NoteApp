@@ -7,18 +7,31 @@
 <script>
 import NotesList from "@/components/NotesList";
 import NewNoteButton from "@/components/NewNoteButton";
-import { fetchUserDetails } from "@/store/utils/userDetails"
+import {mapActions} from "vuex";
+import {actionTypes} from "@/store/modules/firebasedb";
 
 export default {
   name: "AppUserNotes",
   components: { NotesList, NewNoteButton },
-  async mounted() {
-    this.userDetails = await fetchUserDetails();
-  },
   data() {
     return {
-      userDetails: null,
+      userDetails: null
     };
   },
+  methods: {
+    ...mapActions({
+      getUserDetails: actionTypes.getUserDetails
+    }),
+    fetchUserDetails() {
+      this.getUserDetails().then(userDetails => {
+        this.userDetails = userDetails;
+      }).catch(error => {
+        console.error(error);
+      });
+    }
+  },
+  created() {
+    this.fetchUserDetails();
+  }
 };
 </script>
