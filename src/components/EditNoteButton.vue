@@ -41,6 +41,7 @@
                 maxlength="60"
                 aria-describedby="textHelp"
                 disabled
+                v-model="noteTitle"
               />
             </div>
               <div class="form-group">
@@ -52,6 +53,7 @@
                   aria-describedby="textAreaHelpblock"
                   maxlength="255"
                   required
+                  v-model="noteContent"
                 ></textarea>
               </div>
               <small id="textAreaHelpblock" class="form-text text-muted">
@@ -130,13 +132,19 @@ export default {
 name: "EditNoteButton",
 props: {
   // Props to receive note information
-  note: {
+  noteObject: {
     type: Object,
     required: true
   }
 },
 data() {
   return {
+    noteTitle: this.noteObject.data.data.title,
+    noteContent: this.noteObject.data.data.content,
+    isSchool: this.noteObject.data.data.tags.includes("School"),
+    isWork: this.noteObject.data.data.tags.includes("Work"),
+    isPersonal: this.noteObject.data.data.tags.includes("Personal"),
+
   }
 },
 methods: {
@@ -151,9 +159,8 @@ methods: {
   submit() {
     return new Promise((resolve) => {
       console.log(this.noteContent)
-      const noteRef = doc(db, "notes", this.note.id); // Załóżmy, że "users" to nazwa kolekcji
+      const noteRef = doc(db, "notes", this.note.id);
 
-      
       updateDoc(noteRef, {
           "data.content": this.noteContent,
           "data.tags": [

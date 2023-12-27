@@ -6,7 +6,7 @@
     <div class="card-body position-relative">
       <div class="d-flex align-items-end">
         <h5 class="card-title">{{ note.data.data.title }}</h5>
-        <EditNoteButton v-if="isNoteOwner" :noteId="noteId"></EditNoteButton>
+        <EditNoteButton v-if="isNoteOwner" :noteObject="noteObject"></EditNoteButton>
       </div>
       <p class="card-text">{{ note.data.data.content }}</p>
       <!-- <p>{{ note.id }}</p> -->
@@ -44,6 +44,7 @@ export default {
       auth: "",
       currentUserId: "",
       noteId: this.note.id,
+      noteObject: this.note
     };
   },
   components: { DeleteButton, EditNoteButton },
