@@ -29,6 +29,7 @@ const mutations = {
 
   [mutationTypes.setEnhancedTitle](state, payload) {
     state.enhancedTitle = payload;
+    state.isLoading = false;
   },
 };
 
