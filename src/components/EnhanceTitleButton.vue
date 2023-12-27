@@ -1,6 +1,6 @@
 <template>
   <button
-    class="btn btn-primary p-1 m-1 text-white"
+    class="btn btn-info p-1 m-1 text-white"
     @click="enhanceTitle"
     :disabled="isLoading"
   >

@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-top-bar></app-top-bar>
-    <router-view></router-view>
+    <router-view class="bg-light"></router-view>
     <app-footer></app-footer>
   </div>
 </template>
@@ -13,7 +13,7 @@ export default {
   name: "App",
   components: {
     AppTopBar,
-    AppFooter
+    AppFooter,
   },
 };
 </script>

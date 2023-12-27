@@ -1,4 +1,3 @@
-
 <template>
   <!-- Button trigger modal -->
   <button
@@ -114,7 +113,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import { db } from "@/main.js";

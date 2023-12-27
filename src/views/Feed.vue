@@ -1,7 +1,11 @@
 <template>
-  <div>Feed</div>
-  <NotesList :uid="''"></NotesList>
-  <NewNoteButton></NewNoteButton>
+  <div class="p-5 d-flex flex-column">
+    <h2 class="fw-bold font">Notes</h2>
+    <div class="d-flex flex-column align-items-center">
+      <NotesList :uid="''"></NotesList>
+      <NewNoteButton></NewNoteButton>
+    </div>
+  </div>
 </template>
 
 <script>

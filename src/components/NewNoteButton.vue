@@ -2,11 +2,11 @@
   <!-- Button trigger modal -->
   <button
     type="button"
-    class="btn btn-primary"
+    class="btn btn-success position-fixed bottom-0 end-0 m-3"
     data-bs-toggle="modal"
     data-bs-target="#exampleModal"
   >
-    Add new note
+    <i class="bi bi-plus-circle display-5"></i>
   </button>
 
   <!-- Modal -->
@@ -61,7 +61,7 @@
                   class="position-absolute top-50 end-0 translate-middle-y d-flex flex-row"
                 >
                   <button
-                    class="btn btn-link text-secondary p-0"
+                    class="btn btn-link text-info p-0"
                     @click="updateTitle"
                   >
                     <i class="bi bi-check-square-fill"></i>
@@ -133,7 +133,7 @@
             </div>
             <div>
               <button
-                class="btn btn-primary p-1 m-1 text-white"
+                class="btn btn-success p-1 m-1 text-white"
                 @click="submit"
                 :disabled="isLoading"
               >
