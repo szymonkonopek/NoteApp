@@ -22,8 +22,6 @@
     </div>
     <div class="position-absolute end-0">
       <DeleteButton v-if="isNoteOwner" :noteId="noteId"></DeleteButton>
-      <EditNoteButton 
-      v-if="isNoteOwner" :note="note"></EditNoteButton>
     </div>
   </div>
 </template>

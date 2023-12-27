@@ -40,7 +40,6 @@
                 id="titleInput"
                 maxlength="60"
                 aria-describedby="textHelp"
-                v-model="noteObject.data.data.title"
                 disabled
               />
             </div>
@@ -52,12 +51,10 @@
                   rows="3"
                   aria-describedby="textAreaHelpblock"
                   maxlength="255"
-                  v-model="noteObject.data.data.content"
                   required
                 ></textarea>
               </div>
               <small id="textAreaHelpblock" class="form-text text-muted">
-                {{ noteContent.length }}/255
               </small>
               <div class="pt-3 pb-3">
                 <div class="form-check form-check-inline">
@@ -140,11 +137,6 @@ props: {
 },
 data() {
   return {
-    noteObject: this.note,
-    noteContent: "",
-    isSchool: this.note.data.data.tags.includes('School'),
-    isWork: this.note.data.data.tags.includes('Work'),
-    isPersonal: this.note.data.data.tags.includes('Personal'),
   }
 },
 methods: {
