@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-4">
+  <div class="container">
     <div class="row">
       <div class="col-md-4 mt-4">
         <div class="badge bg-success text-wrap fs-5 mb-4">Your Profile</div>

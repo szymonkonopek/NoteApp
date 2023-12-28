@@ -1,24 +1,30 @@
 <template>
-  <form v-if="userDetails">
-    <fieldset disabled>
+  <div v-if="successMessage" class="alert alert-success small-alert">{{ successMessage }}</div>
+  <div v-if="errorMessage" class="alert alert-info small-alert">{{ errorMessage }}</div>
+  <form v-if="userDetails" @submit.prevent="changePassword">
+    <fieldset :disabled="!editingMode">
       <div class="mb-3">
-        <label for="disabledTextInput" class="form-label">Email</label>
-        <input type="text" id="disabledTextInput" class="form-control" :placeholder="userDetails.email">
+        <fieldset :disabled="editingMode">
+          <label for="disabledTextInput" class="form-label">Email</label>
+          <input type="text" id="disabledTextInput" class="form-control" :placeholder="userDetails.email">
+        </fieldset>
       </div>
-      <div class="mb-3">
+      <div class="mb-3" v-if="userDetails.providers.includes('google.com')">
+        <fieldset :disabled="editingMode">
+          <label for="inputPassword5" class="form-label">Password</label>
+          <input type="password" id="inputPassword5" class="form-control mb-4" aria-describedby="passwordHelpBlock"
+                 placeholder="•••••••••••" minlength="6">
+        </fieldset>
+      </div>
+      <div class="mb-3" v-else>
         <label for="inputPassword5" class="form-label">Password</label>
-        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock"
+        <input type="password" id="inputPassword6" v-model="newPassword" class="form-control mb-4" aria-describedby="passwordHelpBlock"
                placeholder="•••••••••••">
       </div>
-      <div class="mb-3">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
-          <label class="form-check-label" for="disabledFieldsetCheck">
-            Tu pewnie coś będzie albo i nie
-          </label>
-        </div>
-      </div>
     </fieldset>
+    <button type="button" class="btn btn-primary mb-5" @click="setEditingMode" v-if="!editingMode">Edit</button>
+    <button type="submit" class="btn btn-secondary mb-5" @click="changePassword" v-if="editingMode">Submit</button>
+    <button type="button" class="btn btn-info mb-5 mx-2" @click="setEditingMode" v-if="editingMode">Cancel</button>
   </form>
 </template>
 
@@ -29,14 +35,25 @@ import {actionTypes} from "@/store/modules/firebasedb";
 export default {
   name: "AppUserForm",
   components: {},
+  props: {
+    userId: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      userDetails: null
+      userDetails: null,
+      editingMode: false,
+      newPassword: '',
+      successMessage: '',
+      errorMessage: '',
     };
   },
   methods: {
     ...mapActions({
-      getUserDetails: actionTypes.getUserDetails
+      getUserDetails: actionTypes.getUserDetails,
+      updatePassword: actionTypes.updatePassword,
     }),
     fetchUserDetails() {
       this.getUserDetails().then(userDetails => {
@@ -44,10 +61,30 @@ export default {
       }).catch(error => {
         console.error(error);
       });
-    }
+    },
+    setEditingMode() {
+      this.editingMode = !this.editingMode;
+    },
+    changePassword() {
+      this.updatePassword({ newPassword: this.newPassword }).then(() => {
+        this.successMessage = "Password change successfully!";
+      }).catch((error) => {
+        this.errorMessage = 'An error occurred while changing the password - Sign Out and Sign In and try again.';
+        console.log(error);
+      });
+      this.setEditingMode()
+    },
   },
   created() {
     this.fetchUserDetails();
   }
 };
 </script>
+
+<style>
+.small-alert {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+</style>
