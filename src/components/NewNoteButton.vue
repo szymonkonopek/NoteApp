@@ -169,9 +169,6 @@ export default {
     return {
       noteTitle: ref(""),
       noteContent: "",
-      isSchool: false,
-      isWork: false,
-      isPersonal: false,
       checkedTags: ref([]),
       isLoading: false,
     };

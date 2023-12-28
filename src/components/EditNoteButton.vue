@@ -1,18 +1,18 @@
 <template>
   <!-- Button trigger modal -->
   <button
-    class="btn btn-secondary"
+    class="btn btn-link text-info"
     data-bs-toggle="modal"
-    data-bs-target="#editModal"
-    
+    :data-bs-target="'#id' + noteId"
+    noteId
   >
-    Edit note
+    <i class="bi bi-pencil"></i>
   </button>
 
   <!-- Modal -->
   <div
     class="modal fade modal-lg"
-    id="editModal"
+    :id="'id' + noteId"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -29,21 +29,19 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form @submit.prevent>
             <div>
-              <!-- Display note information here -->
               <div class="mb-3">
-              <label for="titleInput" class="form-label">Title</label>
-              <input
-                type="text"
-                class="form-control"
-                id="titleInput"
-                maxlength="60"
-                aria-describedby="textHelp"
-                disabled
-                v-model="noteTitle"
-              />
-            </div>
+                <label for="titleInput" class="form-label">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="titleInput"
+                  maxlength="60"
+                  aria-describedby="textHelp"
+                  v-model="noteTitle"
+                />
+              </div>
               <div class="form-group">
                 <label for="exampleFormControlTextarea1">Note content</label>
                 <textarea
@@ -65,7 +63,7 @@
                     type="checkbox"
                     id="checkbox1"
                     value="School"
-                    v-model="isSchool"
+                    v-model="checkedTags"
                   />
                   <label class="form-check-label" for="inlineCheckbox1"
                     >School</label
@@ -77,7 +75,7 @@
                     type="checkbox"
                     id="checkbox2"
                     value="Work"
-                    v-model="isWork"
+                    v-model="checkedTags"
                   />
                   <label class="form-check-label" for="inlineCheckbox2"
                     >Work</label
@@ -89,7 +87,7 @@
                     type="checkbox"
                     id="checkbox3"
                     value="Personal"
-                    v-model="isPersonal"
+                    v-model="checkedTags"
                   />
                   <label class="form-check-label" for="inlineCheckbox3"
                     >Personal</label
@@ -101,7 +99,6 @@
               <button
                 class="btn btn-primary p-1 m-1 text-white"
                 @click="submit"
-                :disabled="isLoading"
               >
                 Submit
               </button>
@@ -114,64 +111,32 @@
 </template>
 
 <script>
-import { db } from "@/main.js";
-import {
-  //collection,
-  //getDocs,
-  //getDoc,
-  doc,
-  //addDoc,
-  //where,
-  //query,
-  //deleteDoc,
-  updateDoc,
-  //serverTimestamp,
-  //orderBy,
-} from "firebase/firestore";
+import { ref } from "vue";
 export default {
-name: "EditNoteButton",
-props: {
-  // Props to receive note information
-  noteObject: {
-    type: Object,
-    required: true
-  }
-},
-data() {
-  return {
-    noteTitle: this.noteObject.data.data.title,
-    noteContent: this.noteObject.data.data.content,
-    isSchool: this.noteObject.data.data.tags.includes("School"),
-    isWork: this.noteObject.data.data.tags.includes("Work"),
-    isPersonal: this.noteObject.data.data.tags.includes("Personal"),
-
-  }
-},
-methods: {
-  editNote() {
-    // check the id of note
-    // save the id of note
-    // find the id of the note
-    // save the info about note to variable
-    // display info
-    
+  name: "EditNoteButton",
+  props: {
+    noteData: {
+      type: Object,
+      required: true,
+    },
+    noteId: {
+      type: String,
+      required: true,
+    },
   },
-  submit() {
-    return new Promise((resolve) => {
-      console.log(this.noteContent)
-      const noteRef = doc(db, "notes", this.noteObject.id);
-
-      updateDoc(noteRef, {
-          "data.content": this.noteContent,
-          "data.tags": [
-            this.isSchool ? "School" : null,
-            this.isWork ? "Work" : null,
-            this.isPersonal ? "Personal" : null,
-          ].filter((tag) => tag !== null),
-        });
-      resolve()
-    })
-  }
+  data() {
+    return {
+      noteTitle: this.noteData.title,
+      noteContent: this.noteData.content,
+      checkedTags: ref([]),
+    };
+  },
+  methods: {
+    submit() {
+      console.log(
+        this.noteTitle + " " + this.noteContent + " " + this.checkedTags
+      );
+    },
   },
 };
 </script>
