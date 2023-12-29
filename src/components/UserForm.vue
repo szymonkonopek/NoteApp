@@ -18,7 +18,7 @@
       </div>
       <div v-else>
         <label for="inputPassword5" class="form-label">Password</label>
-        <input type="password" id="inputPassword6" required v-model="newPassword" class="form-control" aria-describedby="passwordHelpBlock"
+        <input type="password" id="inputPassword5" required v-model="newPassword" class="form-control" aria-describedby="passwordHelpBlock"
                placeholder="•••••••••••" minlength="6">
         <div class="invalid-feedback">
           Please enter 6 characters password.
@@ -26,7 +26,7 @@
       </div>
     </fieldset>
     <button type="button" class="btn btn-primary mb-5 mt-4" @click="setEditingMode" v-if="!editingMode">Edit</button>
-    <button type="submit" class="btn btn-secondary mb-5 mt-4" @click="changePassword" v-if="editingMode">Submit</button>
+    <button type="submit" class="btn btn-secondary mb-5 mt-4" :disabled="!newPassword || newPassword.length < 6" @click="changePassword" v-if="editingMode">Submit</button>
     <button type="button" class="btn btn-info mb-5 mx-2 mt-4" @click="setEditingMode" v-if="editingMode">Cancel</button>
   </form>
 </template>
@@ -49,6 +49,7 @@ export default {
       userDetails: null,
       editingMode: false,
       newPassword: '',
+      repeatPassword: '',
       successMessage: '',
       errorMessage: '',
     };
