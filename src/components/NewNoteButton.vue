@@ -2,7 +2,7 @@
   <!-- Button trigger modal -->
   <button
     type="button"
-    class="btn btn-success position-fixed bottom-0 end-0 m-3"
+    class="btn btn-success position-fixed bottom-0 end-0 m-3 shadow"
     data-bs-toggle="modal"
     data-bs-target="#exampleModal"
   >
@@ -183,7 +183,7 @@ export default {
             tags: this.checkedTags,
           })
           .then(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 500));
             this.$router.go();
           });
       }

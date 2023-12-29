@@ -9,7 +9,8 @@ import {
   query,
   //deleteDoc,
   //updateDoc,
-  //serverTimestamp,
+  serverTimestamp,
+  orderBy,
   //orderBy,
 } from "firebase/firestore";
 import { db } from "@/main.js";
@@ -19,7 +20,6 @@ export const actionTypes = {
   addNote: "[firedb] addNote",
   updatePassword: "[auth] Update Password",
   getUserDetails: "[auth] Get User Details",
-
 };
 
 export const mutationType = {
@@ -37,7 +37,6 @@ const mutations = {
     state.notes = payload;
   },
   [mutationType.addNoteSuccess](state) {
-    location.reload();
     state.isLoading = false;
   },
 
@@ -50,7 +49,7 @@ const actions = {
   [actionTypes.getNotesByUserId](context, { uid }) {
     return new Promise((resolve) => {
       context.commit(mutationType.addNoteStart);
-      let q = query(collection(db, "notes"));
+      let q = query(collection(db, "notes"), orderBy("created", "desc"));
       if (uid) {
         q = query(collection(db, "notes"), where("uid", "==", uid));
       }
@@ -75,6 +74,7 @@ const actions = {
         addDoc(collection(db, "notes"), {
           data: data,
           uid: user.uid,
+          created: serverTimestamp(),
         });
         //context.commit(mutationType.addNoteSuccess);
         resolve();
@@ -87,11 +87,13 @@ const actions = {
       const auth = getAuth();
       const user = auth.currentUser;
       if (user) {
-        updatePassword(user, newPassword).then(() => {
-          resolve("Password updated successfully");
-        }).catch((error) => {
-          reject(error);
-        });
+        updatePassword(user, newPassword)
+          .then(() => {
+            resolve("Password updated successfully");
+          })
+          .catch((error) => {
+            reject(error);
+          });
       } else {
         reject("No authenticated user");
       }
@@ -106,9 +108,9 @@ const actions = {
         const userDetails = {
           uid: user.uid,
           email: user.email,
-          providers: user.providerData.map(provider => provider.providerId),
+          providers: user.providerData.map((provider) => provider.providerId),
           created: user.metadata.creationTime,
-          lastSignIn: user.metadata.lastSignInTime
+          lastSignIn: user.metadata.lastSignInTime,
         };
         resolve(userDetails);
       } else {
