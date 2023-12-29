@@ -6,8 +6,8 @@
       <div class="card-body">
         <div>
           <h1>Login</h1>
+          <div v-if="error" class="alert alert-info small-alert">{{ error }}</div>
           <div class="py-2 my-2">
-          
             <div class="input-group input-group-lg py-2">
               <span class="input-group-text" id="inputGroup-sizing-lg">Email</span>
               <input type="text" class="form-control" placeholser="Email" v-model="email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
@@ -59,6 +59,7 @@ export default {
           this.$router.push({ name: "feed" });
         })
         .catch((error) => {
+          this.error = error;
           console.log(error.code);
         });
       },
@@ -80,6 +81,7 @@ export default {
     return {
       email: "",
       password: "",
+      error: "",
     };
   },
 };
