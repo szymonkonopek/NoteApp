@@ -63,7 +63,7 @@
                     type="checkbox"
                     id="checkbox1"
                     value="School"
-                    v-model="checkedTags"
+                    v-model="isSchool"
                   />
                   <label class="form-check-label" for="inlineCheckbox1"
                     >School</label
@@ -75,7 +75,7 @@
                     type="checkbox"
                     id="checkbox2"
                     value="Work"
-                    v-model="checkedTags"
+                    v-model="isWork"
                   />
                   <label class="form-check-label" for="inlineCheckbox2"
                     >Work</label
@@ -87,7 +87,7 @@
                     type="checkbox"
                     id="checkbox3"
                     value="Personal"
-                    v-model="checkedTags"
+                    v-model="isPersonal"
                   />
                   <label class="form-check-label" for="inlineCheckbox3"
                     >Personal</label
@@ -111,7 +111,9 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { db } from "@/main.js"
+
 export default {
   name: "EditNoteButton",
   props: {
@@ -128,15 +130,39 @@ export default {
     return {
       noteTitle: this.noteData.title,
       noteContent: this.noteData.content,
-      checkedTags: ref([]),
+      isSchool: this.noteData.tags.includes('School'),
+      isWork: this.noteData.tags.includes('Work'),
+      isPersonal: this.noteData.tags.includes('Personal'),
     };
   },
   methods: {
-    submit() {
-      console.log(
-        this.noteTitle + " " + this.noteContent + " " + this.checkedTags
-      );
+    async submit() {
+
+      const docRef = doc(db, "notes", this.noteId);
+      const docSnapshot = await getDoc(docRef);
+      const currentData = docSnapshot.data();
+
+      // Merge existing data with updated data
+      const updatedData = {
+        ...currentData,
+        data: {
+          title: this.noteTitle,
+          content: this.noteContent,
+          tags: [
+            this.isSchool ? "School" : null,
+            this.isWork ? "Work" : null,
+            this.isPersonal ? "Personal" : null,
+          ].filter((tag) => tag !== null),
+        },
+      };
+      updateDoc(docRef, updatedData);
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+            this.$router.go();
     },
   },
+  mounted() {
+    console.log(this.noteData)
+  }
 };
 </script>
