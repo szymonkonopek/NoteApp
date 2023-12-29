@@ -51,7 +51,11 @@ const actions = {
       context.commit(mutationType.addNoteStart);
       let q = query(collection(db, "notes"), orderBy("created", "desc"));
       if (uid) {
-        q = query(collection(db, "notes"), where("uid", "==", uid));
+        q = query(
+          collection(db, "notes"),
+          where("uid", "==", uid),
+          orderBy("created", "desc")
+        );
       }
 
       getDocs(q).then((result) => {
