@@ -1,7 +1,7 @@
 <template>
   <div v-if="successMessage" class="alert alert-success small-alert">{{ successMessage }}</div>
   <div v-if="errorMessage" class="alert alert-info small-alert">{{ errorMessage }}</div>
-  <form v-if="userDetails" @submit.prevent="changePassword">
+  <form class="was-validated" v-if="userDetails" @submit.prevent="changePassword">
     <fieldset :disabled="!editingMode">
       <div class="mb-3">
         <fieldset :disabled="editingMode">
@@ -12,19 +12,22 @@
       <div class="mb-3" v-if="userDetails.providers.includes('google.com')">
         <fieldset :disabled="editingMode">
           <label for="inputPassword5" class="form-label">Password</label>
-          <input type="password" id="inputPassword5" class="form-control mb-4" aria-describedby="passwordHelpBlock"
-                 placeholder="•••••••••••" minlength="6">
+          <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock"
+                 placeholder="•••••••••••">
         </fieldset>
       </div>
-      <div class="mb-3" v-else>
+      <div v-else>
         <label for="inputPassword5" class="form-label">Password</label>
-        <input type="password" id="inputPassword6" v-model="newPassword" class="form-control mb-4" aria-describedby="passwordHelpBlock"
-               placeholder="•••••••••••">
+        <input type="password" id="inputPassword6" required v-model="newPassword" class="form-control" aria-describedby="passwordHelpBlock"
+               placeholder="•••••••••••" minlength="6">
+        <div class="invalid-feedback">
+          Please enter 6 characters password.
+        </div>
       </div>
     </fieldset>
-    <button type="button" class="btn btn-primary mb-5" @click="setEditingMode" v-if="!editingMode">Edit</button>
-    <button type="submit" class="btn btn-secondary mb-5" @click="changePassword" v-if="editingMode">Submit</button>
-    <button type="button" class="btn btn-info mb-5 mx-2" @click="setEditingMode" v-if="editingMode">Cancel</button>
+    <button type="button" class="btn btn-primary mb-5 mt-4" @click="setEditingMode" v-if="!editingMode">Edit</button>
+    <button type="submit" class="btn btn-secondary mb-5 mt-4" @click="changePassword" v-if="editingMode">Submit</button>
+    <button type="button" class="btn btn-info mb-5 mx-2 mt-4" @click="setEditingMode" v-if="editingMode">Cancel</button>
   </form>
 </template>
 
