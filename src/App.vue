@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="bg-light">
     <app-top-bar></app-top-bar>
-    <router-view class="bg-light"></router-view>
+    <router-view></router-view>
     <app-footer></app-footer>
   </div>
 </template>
