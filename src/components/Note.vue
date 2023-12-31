@@ -4,8 +4,25 @@
     style="max-width: 50rem; width: 80vw; min-height: 10rem"
   >
     <div class="card-body position-relative">
+      <div
+        class="modal fade"
+        :id="'id' + noteId"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <NoteModal :noteData="note.data.data" :noteId="noteId" />
+      </div>
+
       <div class="d-flex align-items-end">
-        <h5 class="card-title">{{ note.data.data.title }}</h5>
+        <h5
+          class="card-title"
+          style="cursor: pointer"
+          data-bs-toggle="modal"
+          :data-bs-target="'#id' + noteId"
+        >
+          {{ note.data.data.title }}
+        </h5>
         <EditNoteButton
           v-if="isNoteOwner"
           :noteData="note.data.data"
@@ -34,6 +51,7 @@
 import { getAuth } from "firebase/auth";
 import DeleteButton from "./DeleteButton.vue";
 import EditNoteButton from "./EditNoteButton.vue";
+import NoteModal from "./NoteModal.vue";
 
 export default {
   name: "AppNotesView",
@@ -50,7 +68,7 @@ export default {
       noteId: this.note.id,
     };
   },
-  components: { DeleteButton, EditNoteButton },
+  components: { DeleteButton, EditNoteButton, NoteModal },
   mounted() {
     this.auth = getAuth;
     this.auth().onAuthStateChanged((user) => {

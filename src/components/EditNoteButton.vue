@@ -3,8 +3,7 @@
   <button
     class="btn btn-link text-info"
     data-bs-toggle="modal"
-    :data-bs-target="'#id' + noteId"
-    noteId
+    :data-bs-target="'#id_edit' + noteId"
   >
     <i class="bi bi-pencil"></i>
   </button>
@@ -12,7 +11,7 @@
   <!-- Modal -->
   <div
     class="modal fade modal-lg"
-    :id="'id' + noteId"
+    :id="'id_edit' + noteId"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -112,7 +111,7 @@
 
 <script>
 import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { db } from "@/main.js"
+import { db } from "@/main.js";
 
 export default {
   name: "EditNoteButton",
@@ -130,14 +129,13 @@ export default {
     return {
       noteTitle: this.noteData.title,
       noteContent: this.noteData.content,
-      isSchool: this.noteData.tags.includes('School'),
-      isWork: this.noteData.tags.includes('Work'),
-      isPersonal: this.noteData.tags.includes('Personal'),
+      isSchool: this.noteData.tags.includes("School"),
+      isWork: this.noteData.tags.includes("Work"),
+      isPersonal: this.noteData.tags.includes("Personal"),
     };
   },
   methods: {
     async submit() {
-
       const docRef = doc(db, "notes", this.noteId);
       const docSnapshot = await getDoc(docRef);
       const currentData = docSnapshot.data();
@@ -158,11 +156,11 @@ export default {
       updateDoc(docRef, updatedData);
 
       await new Promise((resolve) => setTimeout(resolve, 500));
-            this.$router.go();
+      this.$router.go();
     },
   },
   mounted() {
-    console.log(this.noteData)
-  }
+    console.log(this.noteData);
+  },
 };
 </script>
