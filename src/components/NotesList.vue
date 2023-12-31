@@ -1,5 +1,10 @@
 <template>
-  <div v-for="(note, index) in notes" :key="index" class="">
+  <div
+    v-for="(note, index) in notes"
+    :key="index"
+    class=""
+    style="width: 100%; max-width: 50rem"
+  >
     <Note :note="note"></Note>
   </div>
 </template>

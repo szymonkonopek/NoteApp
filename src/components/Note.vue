@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="card border-white mb-3 shadow"
-    style="max-width: 50rem; width: 80vw; min-height: 10rem"
-  >
+  <div class="card border-white mb-3 shadow" style="min-height: 10rem">
     <div class="card-body position-relative">
       <div
         class="modal fade"
