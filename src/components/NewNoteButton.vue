@@ -94,8 +94,8 @@
               {{ noteContent.length }}/255
             </small>
             <div class="form-group">
-              <label for="exampleFormSelect">Set color note: </label>
-              <select class="form-control" id="selectColor" v-model="noteColor">
+              <label for="exampleFormSelect">Set color note </label>
+              <select class="form-select" id="selectColor" v-model="noteColor">
                 <option value="text-bg-white">White</option>
                 <option value="text-bg-primary">Light Brown</option>
                 <option value="text-bg-secondary">Dark Brown</option>

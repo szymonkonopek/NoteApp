@@ -17,7 +17,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div v-bind:class="{'modal-content': true, [noteColor]: true}">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Edit note</h1>
           <button
@@ -54,7 +54,17 @@
                 ></textarea>
               </div>
               <small id="textAreaHelpblock" class="form-text text-muted">
+                {{ noteContent.length }}/255
               </small>
+              <div class="form-group">
+              <label for="exampleFormSelect">Note color </label>
+              <select class="form-select" id="selectColor" disabled v-model="noteColor">
+                <option value="text-bg-white">White</option>
+                <option value="text-bg-primary">Light Brown</option>
+                <option value="text-bg-secondary">Dark Brown</option>
+                <option value="text-bg-warning">Light Sea</option>
+              </select>
+            </div>
               <div class="pt-3 pb-3">
                 <div class="form-check form-check-inline">
                   <input
@@ -132,6 +142,7 @@ export default {
       isSchool: this.noteData.tags.includes("School"),
       isWork: this.noteData.tags.includes("Work"),
       isPersonal: this.noteData.tags.includes("Personal"),
+      noteColor: this.noteData.color
     };
   },
   methods: {
@@ -146,6 +157,7 @@ export default {
         data: {
           title: this.noteTitle,
           content: this.noteContent,
+          color: this.noteColor,
           tags: [
             this.isSchool ? "School" : null,
             this.isWork ? "Work" : null,
@@ -158,9 +170,6 @@ export default {
       await new Promise((resolve) => setTimeout(resolve, 500));
       this.$router.go();
     },
-  },
-  mounted() {
-    console.log(this.noteData);
   },
 };
 </script>

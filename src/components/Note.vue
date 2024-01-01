@@ -1,5 +1,5 @@
 <template>
-  <div class="card border-white mb-3 shadow" style="min-height: 10rem">
+  <div v-bind:class="{'card': true, 'border-white': true, 'mb-3': true, 'shadow': true, [noteColor]: true }" style="min-height: 10rem">
     <div class="card-body position-relative">
       <div
         class="modal fade"
@@ -18,7 +18,7 @@
           data-bs-toggle="modal"
           :data-bs-target="'#id' + noteId"
         >
-          {{ note.data.data.title }}
+          {{ note.data.data.title }} 
         </h5>
         <EditNoteButton
           v-if="isNoteOwner"
@@ -32,7 +32,7 @@
       <small
         v-for="(tag, index) in note.data.data.tags"
         :key="index"
-        class="p-1 fw-light text-success"
+        class="p-1 fw-bold text-white me-2 mt-2 badge bg-success border" 
       >
         {{ tag }}
       </small>
@@ -62,6 +62,7 @@ export default {
       auth: "",
       currentUserId: "",
       noteId: this.note.id,
+      noteColor: this.note.data.data.color
     };
   },
   components: { DeleteButton, EditNoteButton, NoteModal },
