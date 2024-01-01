@@ -1,5 +1,5 @@
 <template>
-  <body class="d-flex flex-column min-vh-100">
+  <body class="d-flex flex-column">
     <footer class="text-center text-black mt-auto" style="background-color:#808080">
       <div class="container p-4 pb-0">
         <section class="">
