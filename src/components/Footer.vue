@@ -1,5 +1,5 @@
 <template>
-  <body class="d-flex flex-column">
+  <div class="d-flex flex-column">
     <footer class="text-center text-black mt-auto" style="background-color:#808080">
       <div class="container p-4 pb-0">
         <section class="">
@@ -17,7 +17,7 @@
         <a class="text-black" href="https://uek.krakow.pl/">Cracow University Of Economy</a>
       </div>
     </footer>
-  </body>
+  </div>
 </template>
 
 <script>
