@@ -18,7 +18,7 @@
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div v-bind:class="{'modal-content': true, [noteColor]: true}">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">New note</h1>
           <button
@@ -93,6 +93,15 @@
             <small id="textAreaHelpblock" class="form-text text-muted">
               {{ noteContent.length }}/255
             </small>
+            <div class="form-group">
+              <label for="exampleFormSelect">Set color note: </label>
+              <select class="form-control" id="selectColor" v-model="noteColor">
+                <option value="text-bg-white">White</option>
+                <option value="text-bg-primary">Light Brown</option>
+                <option value="text-bg-secondary">Dark Brown</option>
+                <option value="text-bg-warning">Light Sea</option>
+              </select>
+            </div>
             <div class="pt-3 pb-3">
               <div class="form-check form-check-inline">
                 <input
@@ -170,6 +179,7 @@ export default {
       noteTitle: ref(""),
       noteContent: "",
       checkedTags: ref([]),
+      noteColor: "text-bg-white",
       isLoading: false,
     };
   },
@@ -181,15 +191,14 @@ export default {
             title: this.noteTitle,
             content: this.noteContent,
             tags: this.checkedTags,
-          })
+            color: this.noteColor
+          },
+          )
           .then(async () => {
             await new Promise((resolve) => setTimeout(resolve, 500));
             this.$router.go();
           });
       }
-    },
-    test() {
-      console.log("test");
     },
     updateTitle() {
       this.noteTitle = this.enhancedTitle;

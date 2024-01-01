@@ -27,7 +27,6 @@
         ></EditNoteButton>
       </div>
       <p class="card-text">{{ note.data.data.content }}</p>
-      <!-- <p>{{ note.id }}</p> -->
     </div>
     <div class="d-flex flex-row p-2">
       <small

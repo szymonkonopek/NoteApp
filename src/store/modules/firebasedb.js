@@ -80,7 +80,7 @@ const actions = {
           uid: user.uid,
           created: serverTimestamp(),
         });
-        //context.commit(mutationType.addNoteSuccess);
+        context.commit(mutationType.addNoteSuccess);
         resolve();
       });
     });
