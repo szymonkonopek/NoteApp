@@ -1,8 +1,8 @@
 <template>
 <div style="min-height:90vh">
   <div style="height: 100px"></div>
-  <div class="container-fluid justify-content-center text-center px-4 py-2 mx-auto my-4">
-    <div class="card justify-content-center text-center mx-auto" style="width: 30rem; background: rgba(233, 226, 222, 0.85);border-radius: 16px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px);">
+  <div class="container-fluid justify-content-center text-center col-sm-12 col-lg-8 px-4 py-2 mx-auto my-4">
+    <div class="card justify-content-center text-center w-75 mx-auto" style="background: rgba(233, 226, 222, 0.85);border-radius: 16px;box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px);">
       <div class="card-body">
         <div>
           <h1>Register</h1>
