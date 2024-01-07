@@ -56,6 +56,21 @@
               <small id="textAreaHelpblock" class="form-text text-muted">
                 {{ noteContent.length }}/255
               </small>
+              <div>
+                Note visible for others?
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="true" v-model="noteVisibleForOthers" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="false" v-model="noteVisibleForOthers">
+              <label class="form-check-label" for="flexRadioDefault1">
+                No
+              </label>
+            </div>
               <div class="form-group">
               <label for="exampleFormSelect">Note color </label>
               <select class="form-select" id="selectColor" disabled v-model="noteColor">
@@ -142,7 +157,8 @@ export default {
       isSchool: this.noteData.tags.includes("School"),
       isWork: this.noteData.tags.includes("Work"),
       isPersonal: this.noteData.tags.includes("Personal"),
-      noteColor: this.noteData.color
+      noteColor: this.noteData.color,
+      noteVisibleForOthers: this.noteData.visibleForOthers
     };
   },
   methods: {
@@ -158,6 +174,7 @@ export default {
           title: this.noteTitle,
           content: this.noteContent,
           color: this.noteColor,
+          visibleForOthers: this.noteVisibleForOthers,
           tags: [
             this.isSchool ? "School" : null,
             this.isWork ? "Work" : null,

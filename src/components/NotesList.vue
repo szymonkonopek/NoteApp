@@ -5,7 +5,7 @@
     class=""
     style="width: 100%; max-width: 50rem"
   >
-    <Note :note="note"></Note>
+    <Note v-if="note.data.data.visibleForOthers=='true'" :note="note"></Note>
   </div>
 </template>
 

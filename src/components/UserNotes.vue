@@ -1,18 +1,18 @@
 <template>
-  <NotesList v-if="userDetails" :uid="userDetails.uid"></NotesList>
-  <NotesList v-else :uid="''"></NotesList>
+  <NotesListProfileView  v-if="userDetails" :uid="userDetails.uid"></NotesListProfileView >
+  <NotesListProfileView  v-else :uid="''"></NotesListProfileView >
   <NewNoteButton></NewNoteButton>
 </template>
 
 <script>
-import NotesList from "@/components/NotesList";
+import NotesListProfileView from "@/components/NotesListProfile";
 import NewNoteButton from "@/components/NewNoteButton";
 import {mapActions} from "vuex";
 import {actionTypes} from "@/store/modules/firebasedb";
 
 export default {
   name: "AppUserNotes",
-  components: { NotesList, NewNoteButton },
+  components: { NotesListProfileView, NewNoteButton },
   data() {
     return {
       userDetails: null
