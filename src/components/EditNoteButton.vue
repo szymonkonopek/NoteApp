@@ -106,7 +106,7 @@
             </div>
             <div>
               <button
-                class="btn btn-primary p-1 m-1 text-white"
+                class="btn btn-success p-1 m-1 text-white"
                 @click="submit"
               >
                 Submit
