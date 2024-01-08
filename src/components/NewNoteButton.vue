@@ -196,7 +196,7 @@ export default {
       checkedTags: ref([]),
       noteColor: "text-bg-white",
       isLoading: false,
-      noteVisibleForOthers: ""
+      noteVisibleForOthers: "true"
     };
   },
   methods: {
