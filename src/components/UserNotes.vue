@@ -1,6 +1,5 @@
 <template>
   <NotesListProfileView  v-if="userDetails" :uid="userDetails.uid"></NotesListProfileView >
-  <NotesListProfileView  v-else :uid="''"></NotesListProfileView >
   <NewNoteButton></NewNoteButton>
 </template>
 
@@ -29,6 +28,9 @@ export default {
         console.error(error);
       });
     }
+  },
+  mounted() {
+    this.fetchUserDetails();
   },
   created() {
     this.fetchUserDetails();

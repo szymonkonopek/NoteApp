@@ -1,7 +1,7 @@
 <template>
   <div
-    v-for="(note, index) in notes"
-    :key="index"
+    v-for="(note) in notes"
+    :key="note.id"
     class=""
     style="width: 100%; max-width: 50rem"
   >
