@@ -208,7 +208,7 @@ export default {
             content: this.noteContent,
             tags: this.checkedTags,
             color: this.noteColor,
-            visibleForOthers: this.noteVisibleForOthers
+            visibleForOthers: this.noteVisibleForOthers === "true"
           },
           )
           .then(async () => {
