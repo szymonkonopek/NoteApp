@@ -174,7 +174,7 @@ export default {
           title: this.noteTitle,
           content: this.noteContent,
           color: this.noteColor,
-          visibleForOthers: this.noteVisibleForOthers,
+          visibleForOthers: this.noteVisibleForOthers === "true",
           tags: [
             this.isSchool ? "School" : null,
             this.isWork ? "Work" : null,
