@@ -21,34 +21,34 @@
 </template>
 
 <script>
-import {getAuth} from "firebase/auth";
+import { getAuth } from 'firebase/auth'
 
 export default {
-  name: "AppFooter",
-  data() {
+  name: 'AppFooter',
+  data () {
     return {
-      isLoggedIn: "",
-      auth: "",
-    };
+      isLoggedIn: '',
+      auth: ''
+    }
   },
-  mounted() {
-    this.auth = getAuth;
+  mounted () {
+    this.auth = getAuth
     this.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.isLoggedIn = true;
+        this.isLoggedIn = true
       } else {
-        this.isLoggedIn = false;
+        this.isLoggedIn = false
       }
-    });
+    })
   },
   methods: {
-    handleSignOut() {
+    handleSignOut () {
       this.auth()
-          .signOut(this.auth)
-          .then(() => {
-            this.$router.push({name: "home"});
-          });
-    },
-  },
+        .signOut(this.auth)
+        .then(() => {
+          this.$router.push({ name: 'home' })
+        })
+    }
+  }
 }
 </script>

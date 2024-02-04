@@ -18,7 +18,7 @@
           data-bs-toggle="modal"
           :data-bs-target="'#id' + noteId"
         >
-          {{ note.data.data.title }} 
+          {{ note.data.data.title }}
         </h5>
         <EditNoteButton
           v-if="isNoteOwner"
@@ -32,7 +32,7 @@
       <small
         v-for="(tag, index) in note.data.data.tags"
         :key="index"
-        class="p-1 fw-bold text-white me-2 mt-2 badge bg-success border" 
+        class="p-1 fw-bold text-white me-2 mt-2 badge bg-success border"
       >
         {{ tag }}
       </small>
@@ -44,41 +44,41 @@
 </template>
 
 <script>
-import { getAuth } from "firebase/auth";
-import DeleteButton from "./DeleteButton.vue";
-import EditNoteButton from "./EditNoteButton.vue";
-import NoteModal from "./NoteModal.vue";
+import { getAuth } from 'firebase/auth'
+import DeleteButton from './DeleteButton.vue'
+import EditNoteButton from './EditNoteButton.vue'
+import NoteModal from './NoteModal.vue'
 
 export default {
-  name: "AppNotesView",
+  name: 'AppNotesView',
   props: {
     note: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
-  data() {
+  data () {
     return {
-      auth: "",
-      currentUserId: "",
+      auth: '',
+      currentUserId: '',
       noteId: this.note.id,
       noteColor: this.note.data.data.color
-    };
+    }
   },
   components: { DeleteButton, EditNoteButton, NoteModal },
-  mounted() {
-    this.auth = getAuth;
+  mounted () {
+    this.auth = getAuth
     this.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.currentUserId = user.uid;
+        this.currentUserId = user.uid
       }
-    });
+    })
   },
 
   computed: {
-    isNoteOwner() {
-      return this.note.data.uid === this.currentUserId;
-    },
-  },
-};
+    isNoteOwner () {
+      return this.note.data.uid === this.currentUserId
+    }
+  }
+}
 </script>

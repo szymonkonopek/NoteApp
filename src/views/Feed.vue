@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import NotesList from "@/components/NotesList.vue";
-import NewNoteButton from "@/components/NewNoteButton.vue";
+import NotesList from '@/components/NotesList.vue'
+import NewNoteButton from '@/components/NewNoteButton.vue'
 export default {
-  name: "AppFeedView",
-  components: { NotesList, NewNoteButton },
-};
+  name: 'AppFeedView',
+  components: { NotesList, NewNoteButton }
+}
 </script>

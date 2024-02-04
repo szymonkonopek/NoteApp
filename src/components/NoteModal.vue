@@ -30,21 +30,21 @@
 
 <script>
 export default {
-  name: "NoteModal",
+  name: 'NoteModal',
   props: {
     noteData: {
       type: Object,
-      required: true,
+      required: true
     },
     noteId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
-  data() {
+  data () {
     return {
       noteColor: this.noteData.color
-    };
-  },
-};
+    }
+  }
+}
 </script>

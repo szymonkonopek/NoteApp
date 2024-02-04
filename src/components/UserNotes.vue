@@ -4,36 +4,36 @@
 </template>
 
 <script>
-import NotesListProfileView from "@/components/NotesListProfile";
-import NewNoteButton from "@/components/NewNoteButton";
-import {mapActions} from "vuex";
-import {actionTypes} from "@/store/modules/firebasedb";
+import NotesListProfileView from '@/components/NotesListProfile'
+import NewNoteButton from '@/components/NewNoteButton'
+import { mapActions } from 'vuex'
+import { actionTypes } from '@/store/modules/firebasedb'
 
 export default {
-  name: "AppUserNotes",
+  name: 'AppUserNotes',
   components: { NotesListProfileView, NewNoteButton },
-  data() {
+  data () {
     return {
       userDetails: null
-    };
+    }
   },
   methods: {
     ...mapActions({
       getUserDetails: actionTypes.getUserDetails
     }),
-    fetchUserDetails() {
+    fetchUserDetails () {
       this.getUserDetails().then(userDetails => {
-        this.userDetails = userDetails;
+        this.userDetails = userDetails
       }).catch(error => {
-        console.error(error);
-      });
+        console.error(error)
+      })
     }
   },
-  mounted() {
-    this.fetchUserDetails();
+  mounted () {
+    this.fetchUserDetails()
   },
-  created() {
-    this.fetchUserDetails();
+  created () {
+    this.fetchUserDetails()
   }
-};
+}
 </script>

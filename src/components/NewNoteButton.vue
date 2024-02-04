@@ -175,32 +175,32 @@
   </div>
 </template>
 <script>
-import { actionTypes } from "@/store/modules/firebasedb";
-import { ref } from "vue";
-import EnhanceTitleButton from "./EnhanceTitleButton.vue";
-import { mapState } from "vuex";
-import { mutationTypes } from "@/store/modules/chatgpt";
+import { actionTypes } from '@/store/modules/firebasedb'
+import { ref } from 'vue'
+import EnhanceTitleButton from './EnhanceTitleButton.vue'
+import { mapState } from 'vuex'
+import { mutationTypes } from '@/store/modules/chatgpt'
 
 export default {
-  name: "NewNoteButton",
+  name: 'NewNoteButton',
   computed: {
     ...mapState({
       enhancedTitle: (state) => state.chatgpt.enhancedTitle,
-      isLoading: (state) => state.firebase.isLoading,
-    }),
+      isLoading: (state) => state.firebase.isLoading
+    })
   },
-  data() {
+  data () {
     return {
-      noteTitle: ref(""),
-      noteContent: "",
+      noteTitle: ref(''),
+      noteContent: '',
       checkedTags: ref([]),
-      noteColor: "text-bg-white",
+      noteColor: 'text-bg-white',
       isLoading: false,
-      noteVisibleForOthers: "true"
-    };
+      noteVisibleForOthers: 'true'
+    }
   },
   methods: {
-    submit() {
+    submit () {
       if (this.noteTitle.length > 0 && this.noteContent.length > 0) {
         this.$store
           .dispatch(actionTypes.addNote, {
@@ -208,24 +208,24 @@ export default {
             content: this.noteContent,
             tags: this.checkedTags,
             color: this.noteColor,
-            visibleForOthers: this.noteVisibleForOthers === "true"
-          },
+            visibleForOthers: this.noteVisibleForOthers === 'true'
+          }
           )
           .then(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 500));
-            this.$router.go();
-          });
+            await new Promise((resolve) => setTimeout(resolve, 500))
+            this.$router.go()
+          })
       }
     },
-    updateTitle() {
-      this.noteTitle = this.enhancedTitle;
-      this.$store.commit(mutationTypes.setEnhancedTitle, "");
+    updateTitle () {
+      this.noteTitle = this.enhancedTitle
+      this.$store.commit(mutationTypes.setEnhancedTitle, '')
     },
-    discardTitle() {
-      this.noteTitle = "";
-      this.$store.commit(mutationTypes.setEnhancedTitle, "");
-    },
+    discardTitle () {
+      this.noteTitle = ''
+      this.$store.commit(mutationTypes.setEnhancedTitle, '')
+    }
   },
-  components: { EnhanceTitleButton },
-};
+  components: { EnhanceTitleButton }
+}
 </script>

@@ -135,37 +135,37 @@
 </template>
 
 <script>
-import { doc, updateDoc, getDoc } from "firebase/firestore";
-import { db } from "@/main.js";
+import { doc, updateDoc, getDoc } from 'firebase/firestore'
+import { db } from '@/main.js'
 
 export default {
-  name: "EditNoteButton",
+  name: 'EditNoteButton',
   props: {
     noteData: {
       type: Object,
-      required: true,
+      required: true
     },
     noteId: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
-  data() {
+  data () {
     return {
       noteTitle: this.noteData.title,
       noteContent: this.noteData.content,
-      isSchool: this.noteData.tags.includes("School"),
-      isWork: this.noteData.tags.includes("Work"),
-      isPersonal: this.noteData.tags.includes("Personal"),
+      isSchool: this.noteData.tags.includes('School'),
+      isWork: this.noteData.tags.includes('Work'),
+      isPersonal: this.noteData.tags.includes('Personal'),
       noteColor: this.noteData.color,
       noteVisibleForOthers: this.noteData.visibleForOthers
-    };
+    }
   },
   methods: {
-    async submit() {
-      const docRef = doc(db, "notes", this.noteId);
-      const docSnapshot = await getDoc(docRef);
-      const currentData = docSnapshot.data();
+    async submit () {
+      const docRef = doc(db, 'notes', this.noteId)
+      const docSnapshot = await getDoc(docRef)
+      const currentData = docSnapshot.data()
 
       // Merge existing data with updated data
       const updatedData = {
@@ -174,19 +174,19 @@ export default {
           title: this.noteTitle,
           content: this.noteContent,
           color: this.noteColor,
-          visibleForOthers: this.noteVisibleForOthers === "true",
+          visibleForOthers: this.noteVisibleForOthers === 'true',
           tags: [
-            this.isSchool ? "School" : null,
-            this.isWork ? "Work" : null,
-            this.isPersonal ? "Personal" : null,
-          ].filter((tag) => tag !== null),
-        },
-      };
-      updateDoc(docRef, updatedData);
+            this.isSchool ? 'School' : null,
+            this.isWork ? 'Work' : null,
+            this.isPersonal ? 'Personal' : null
+          ].filter((tag) => tag !== null)
+        }
+      }
+      updateDoc(docRef, updatedData)
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      this.$router.go();
-    },
-  },
-};
+      await new Promise((resolve) => setTimeout(resolve, 500))
+      this.$router.go()
+    }
+  }
+}
 </script>

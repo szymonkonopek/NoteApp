@@ -14,12 +14,11 @@
 </template>
 
 <script>
-import AppUserData from "@/components/UserData";
-import AppUserNotes from "@/components/UserNotes";
+import AppUserData from '@/components/UserData'
+import AppUserNotes from '@/components/UserNotes'
 
 export default {
-  name: "AppProfileView",
-  components: {AppUserNotes, AppUserData},
-};
+  name: 'AppProfileView',
+  components: { AppUserNotes, AppUserData }
+}
 </script>
-

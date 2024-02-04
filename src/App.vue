@@ -7,15 +7,15 @@
 </template>
 
 <script>
-import AppTopBar from "@/components/TopBar.vue";
-import AppFooter from "@/components/Footer";
+import AppTopBar from '@/components/TopBar.vue'
+import AppFooter from '@/components/Footer'
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppTopBar,
-    AppFooter,
-  },
-};
+    AppFooter
+  }
+}
 </script>
 
 <style></style>
